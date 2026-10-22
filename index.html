@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portofolio Arya Al-Muharram S.Pd.I, siswa kelas XI jurusan RPL di SMKs Putra Anda Binjai.">
+  <title>Arya Al-Muharram — Portofolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Navigasi utama">
+      <a class="brand" href="#home" aria-label="Arya, beranda"><span class="brand-mark">A.</span><span>arya<span class="brand-dot">.</span></span></a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Buka menu navigasi" aria-expanded="false" aria-controls="navLinks"><span></span><span></span></button>
+      <div class="nav-links" id="navLinks">
+        <a class="nav-link active" href="#home">Beranda</a>
+        <a class="nav-link" href="#about">Tentang</a>
+        <a class="nav-link" href="#experience">Perjalanan</a>
+        <a class="nav-link" href="#projects">Proyek</a>
+        <a class="nav-link" href="#writing">Catatan</a>
+        <a class="nav-link" href="#contact">Kontak</a>
+      </div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Ganti ke mode terang" title="Ganti tema"><span id="themeIcon" aria-hidden="true">☼</span><span id="themeText">Mode terang</span></button>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero container section" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> SEDANG BELAJAR & TERUS BERTUMBUH</div>
+        <h1>Mengubah ide<br>menjadi <span class="text-gradient">karya.</span></h1>
+        <p class="hero-description">Halo, saya <strong>Arya Al-Muharram S.Pd.I</strong> — siswa kelas XI jurusan Rekayasa Perangkat Lunak (RPL) di SMKs Putra Anda Binjai yang sedang belajar web development dan senang mengubah ide menjadi pengalaman digital.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#projects">Jelajahi proyek <span aria-hidden="true">↘</span></a>
+          <a class="button button-quiet" href="#about">Kenali saya <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="hero-meta">
+          <div class="meta-item"><span class="meta-number">01</span><span>Terus belajar</span></div><span class="meta-divider"></span>
+          <div class="meta-item"><span class="meta-number">∞</span><span>Ide untuk dicoba</span></div>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="Kartu perkenalan Arya">
+        <div class="orbit orbit-large"></div><div class="orbit orbit-small"></div>
+        <div class="profile-card">
+          <div class="profile-card-top"><span class="window-dots"><i></i><i></i><i></i></span><span class="card-label">MY DIGITAL SPACE</span></div>
+          <div class="avatar-art" aria-label="Foto profil Arya bergantian">
+            <div class="avatar-halo"></div>
+            <div class="avatar-slideshow" id="avatarSlideshow">
+              <img class="avatar-photo is-active" src="foto-profil-1.jpg" alt="Foto profil Arya 1">
+              <img class="avatar-photo" src="foto-profil-2.jpg" alt="Foto profil Arya 2">
+              <img class="avatar-photo" src="foto-profil-3.jpg" alt="Foto profil Arya 3">
+              <div class="avatar-initials avatar-fallback">A<span>.</span></div>
+            </div>
+            <div class="avatar-spark spark-one">✳</div><div class="avatar-spark spark-two">✦</div>
+          </div>
+          <div class="profile-card-bottom"><div><p class="card-kicker">HELLO, WORLD!</p><h2>Arya Al-Muharram</h2><p class="card-role">Siswa XI · RPL</p></div><span class="card-arrow" aria-hidden="true">↗</span></div>
+        </div>
+        <div class="floating-chip chip-code"><span>&lt;/&gt;</span> HTML · CSS · JS</div>
+        <div class="floating-chip chip-status"><span class="status-dot"></span> Learning by building</div>
+      </div>
+      <a class="scroll-cue" href="#about"><span class="scroll-line"></span> GULIR UNTUK MENJELAJAH</a>
+    </section>
+
+    <section class="section container about-section" id="about">
+      <div class="section-heading"><p class="section-label">01 / TENTANG SAYA</p><h2>Masih belajar. <span class="muted-heading">Terus bertumbuh.</span></h2></div>
+      <div class="about-grid">
+        <p class="about-lead">Setiap proyek adalah kesempatan untuk memahami sesuatu yang baru.</p>
+        <div class="about-detail">
+          <div class="identity-grid" aria-label="Data diri">
+            <div class="identity-item"><span>Nama</span><strong>Arya Al-Muharram S.Pd.I</strong></div>
+            <div class="identity-item"><span>Kelas</span><strong>XI</strong></div>
+            <div class="identity-item"><span>Jurusan</span><strong>RPL (Rekayasa Perangkat Lunak)</strong></div>
+            <div class="identity-item"><span>Sekolah</span><strong>SMKs Putra Anda Binjai</strong></div>
+          </div>
+          <p>Saya sedang mempelajari dasar-dasar pengembangan website menggunakan HTML, CSS, dan JavaScript. Saya ingin membuat website yang bukan hanya menarik dilihat, tetapi juga mudah digunakan.</p>
+          <p>Portofolio ini menjadi tempat untuk menampilkan proses belajar, percobaan, dan karya yang saya bangun satu per satu.</p>
+          <div class="skill-list" aria-label="Teknologi yang sedang dipelajari"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UI dasar</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container journey-section" id="experience">
+      <div class="section-heading"><p class="section-label">02 / PERJALANAN</p><h2>Langkah kecil, <span class="muted-heading">kemajuan nyata.</span></h2></div>
+      <div class="timeline">
+        <article class="timeline-item"><div class="timeline-marker"></div><div class="timeline-date">SAAT INI</div><div class="timeline-content"><h3>Belajar Web Development</h3><p class="timeline-subtitle">Pembelajaran mandiri & tugas sekolah</p><p>Mempelajari struktur HTML, styling CSS, dan interaksi sederhana menggunakan JavaScript sambil membuat proyek latihan.</p></div><span class="timeline-tag">Sedang berjalan</span></article>
+        <article class="timeline-item"><div class="timeline-marker"></div><div class="timeline-date">TARGET BERIKUTNYA</div><div class="timeline-content"><h3>Membangun lebih banyak proyek</h3><p class="timeline-subtitle">Target belajar</p><p>Melatih kemampuan menyusun layout, membuat desain responsif, dan memahami cara kerja website melalui praktik langsung.</p></div><span class="timeline-tag tag-muted">Target</span></article>
+      </div>
+      <p class="content-note">Sesuaikan bagian perjalanan ini dengan pengalaman dan tanggal yang benar-benar kamu miliki.</p>
+    </section>
+
+    <section class="section container projects-section" id="projects">
+      <div class="section-heading section-heading-row"><div><p class="section-label">03 / PROYEK PILIHAN</p><h2>Belajar lewat <span class="muted-heading">karya.</span></h2></div><span class="project-count">01 PROYEK</span></div>
+      <article class="project-card">
+        <div class="project-preview">
+          <div class="preview-window">
+            <div class="preview-top"><span></span><span></span><span></span><small>RestoNova.html</small></div>
+            <div class="preview-content"><div class="preview-copy"><span class="preview-mini">WEBSITE RESTORAN</span><b>Rasa enak,<br>tampilan menarik.</b><i></i><i></i></div><div class="preview-dish"><div class="dish-ring"><div class="dish-center">RN</div></div></div></div>
+            <div class="preview-bottom"><span></span><span></span><span></span></div>
+          </div>
+          <span class="preview-caption">PROJECT / 001</span>
+        </div>
+        <div class="project-info">
+          <div class="project-type">WEBSITE · PROYEK PRIBADI</div><h3>RestoNova</h3>
+          <p>Website bertema restoran yang saya buat. File proyek tetap terpisah dari portofolio ini, sehingga bisa dibuka sebagai website sendiri melalui tombol di bawah.</p>
+          <div class="project-tags"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+          <a class="project-link" href="RestoNova.html" target="_blank" rel="noopener noreferrer">Buka RestoNova.html <span aria-hidden="true">↗</span></a>
+          <p class="content-note">Pastikan file RestoNova.html berada di folder yang sama dengan index.html.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="section container notes-section" id="writing">
+      <div class="section-heading"><p class="section-label">04 / CATATAN BELAJAR</p><h2>Hal yang saya <span class="muted-heading">pelajari.</span></h2></div>
+      <div class="notes-card"><div class="notes-icon" aria-hidden="true">✳</div><div><h3>Proses lebih penting daripada terburu-buru.</h3><p>Setiap kesalahan memberi kesempatan untuk memahami kode dengan lebih baik. Saya ingin terus belajar, mencoba, menguji, dan memperbaiki karya saya.</p></div><span class="notes-index">NOTE 001</span></div>
+    </section>
+
+    <section class="section container contact-section" id="contact">
+      <div class="contact-panel"><p class="section-label">05 / KONTAK</p><h2>Punya ide menarik?<br><span class="text-gradient">Mari terhubung.</span></h2><p>Saya masih dalam proses belajar dan terbuka untuk bertukar ide serta pengalaman.</p><a class="button button-primary" href="mailto:emailkamu@example.com">Kirim email <span aria-hidden="true">↗</span></a>
+        <p class="social-heading">Temukan saya di media sosial</p>
+        <div class="social-links" aria-label="Media sosial Arya">
+          <a class="social-link" href="https://www.tiktok.com/@ray_hary132?is_from_webapp=1&sender_device=pc" target="_blank" rel="noopener noreferrer"><span class="social-symbol">♪</span><span><strong>TikTok</strong><small>@ray_hary132</small></span><span class="social-arrow">↗</span></a>
+          <a class="social-link" href="https://www.instagram.com/my.aam09?xtok=YzV2Ymt5Nmo2ZTgx" target="_blank" rel="noopener noreferrer"><span class="social-symbol">◎</span><span><strong>Instagram</strong><small>@my.aam09</small></span><span class="social-arrow">↗</span></a>
+          <a class="social-link" href="https://www.youtube.com/@senggel-YTB132" target="_blank" rel="noopener noreferrer"><span class="social-symbol">▶</span><span><strong>YouTube</strong><small>@senggel-YTB132</small></span><span class="social-arrow">↗</span></a>
+          <a class="social-link" href="https://github.com/" target="_blank" rel="noopener noreferrer"><span class="social-symbol">⌘</span><span><strong>GitHub</strong><small>lamberd132</small></span><span class="social-arrow">↗</span></a>
+        </div>
+        <p class="content-note">Ganti emailkamu@example.com dan semua tulisan username dengan alamat email serta username media sosial milikmu agar tautannya menuju akun yang benar.</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer container"><a class="brand footer-brand" href="#home"><span class="brand-mark">A.</span><span>arya<span class="brand-dot">.</span></span></a><p>Dibuat sambil belajar, satu baris kode setiap kali.</p><a class="back-top" href="#home">Kembali ke atas ↑</a><span class="copyright">© <span id="currentYear"></span> Arya Al-Muharram S.Pd.I</span></footer>
+</body>
+</html>

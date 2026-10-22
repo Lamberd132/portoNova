@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dapur Berkah - Kuliner Lezat & Halal 100%</title>
+    
+    <!-- Google Fonts: Poppins & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS v3 CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            500: '#10B981', // Hijau Utama (Emerald)
+                            600: '#059669',
+                            700: '#047857',
+                        },
+                        accent: {
+                            500: '#F59E0B', // Amber
+                            600: '#D97706',
+                        }
+                    },
+                    fontFamily: {
+                        poppins: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB;
+            color: #1F2937;
+        }
+        h1, h2, h3, h4, h5, h6, .font-heading {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Custom Animation for Pulse Wave */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.15); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .animate-pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        /* Hide scrollbar for category tabs on mobile */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed top-20 right-5 z-50 transform translate-x-full transition-transform duration-300 ease-in-out bg-emerald-800 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center gap-3 border border-emerald-600">
+        <i class="fa-solid me-1 fa-circle-check text-emerald-300 text-xl"></i>
+        <span id="toast-message" class="text-sm font-medium">Pesanan diproses! Membuka WhatsApp...</span>
+    </div>
+
+    <!-- HEADER / NAVBAR STICKY -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo -->
+                <a href="#beranda" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 bg-brand-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-brand-500/30 group-hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-utensils text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold font-heading text-gray-900 block leading-tight tracking-tight">Dapur Berkah</span>
+                        <span class="text-xs font-semibold text-brand-600 tracking-wider uppercase block">Kuliner Nusantara</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Menu -->
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="#beranda" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Beranda</a>
+                    <a href="#keunggulan" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Keunggulan</a>
+                    <a href="#produk" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Menu Produk</a>
+                    <a href="#tentang" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Tentang Kami</a>
+                    <a href="#testimoni" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Testimoni</a>
+                    <a href="#lokasi" class="text-sm font-semibold text-gray-700 hover:text-brand-500 transition-colors">Lokasi</a>
+                </nav>
+
+                <!-- Desktop CTA Button -->
+                <div class="hidden md:flex items-center">
+                    <a href="#produk" class="px-5 py-2.5 bg-brand-500 hover:bg-brand-600 text-white text-sm font-semibold rounded-xl shadow-lg shadow-brand-500/30 hover:shadow-brand-500/50 transition-all transform hover:-translate-y-0.5 flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping"></i>
+                        <span>Pesan Sekarang</span>
+                    </a>
+                </div>
+
+                <!-- Mobile Burger Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2.5 text-gray-700 hover:text-brand-500 focus:outline-none rounded-xl hover:bg-gray-100 transition-colors" aria-label="Toggle Navigation Menu">
+                        <i class="fa-solid fa-bars text-2xl" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 px-4 pt-2 pb-6 space-y-3 shadow-xl transition-all">
+            <a href="#beranda" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Beranda</a>
+            <a href="#keunggulan" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Keunggulan</a>
+            <a href="#produk" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Menu Produk</a>
+            <a href="#tentang" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Tentang Kami</a>
+            <a href="#testimoni" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Testimoni</a>
+            <a href="#lokasi" class="mobile-link block px-4 py-2.5 rounded-xl font-medium text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors">Lokasi</a>
+            <div class="pt-2">
+                <a href="#produk" class="mobile-link w-full py-3 bg-brand-500 text-white font-semibold rounded-xl text-center shadow-lg shadow-brand-500/20 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span>Pesan Sekarang</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="beranda" class="relative pt-8 pb-16 md:pt-16 md:pb-24 overflow-hidden bg-gradient-to-b from-brand-50/50 via-white to-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Left Column Text -->
+                    <div class="lg:col-span-7 text-center lg:text-left">
+                        <!-- Halal & Higienis Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold tracking-wide uppercase mb-6 shadow-sm border border-emerald-200">
+                            <i class="fa-solid fa-certificate text-emerald-600"></i>
+                            <span>100% Halal, Higienis & Lezat</span>
+                        </div>
+                        
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 tracking-tight leading-tight mb-6">
+                            Kehangatan Rasa Otentik <span class="text-brand-500 underline decoration-accent-500/40 decoration-wavy">Nusantara</span>
+                        </h1>
+                        
+                        <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Nikmati kelezatan olahan makanan rumah khas Dapur Berkah. Dibuat dengan resep warisan keluarga, bahan-bahan segar pilihan tanpa pengawet, dan dimasak secara higienis setiap hari.
+                        </p>
+                        
+                        <!-- CTA Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-10">
+                            <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Berkah,%20saya%20ingin%20memesan%20makanan." target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-3">
+                                <i class="fa-brands fa-whatsapp text-2xl"></i>
+                                <span>Pesan via WhatsApp</span>
+                            </a>
+                            <a href="#produk" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-gray-50 text-gray-800 font-bold rounded-2xl border border-gray-200 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-utensils text-brand-500"></i>
+                                <span>Lihat Menu Kami</span>
+                            </a>
+                        </div>
+
+                        <!-- Statistics -->
+                        <div class="pt-6 border-t border-gray-200 grid grid-cols-3 gap-4 text-center lg:text-left">
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-gray-900">5.000+</p>
+                                <p class="text-xs sm:text-sm text-gray-500 font-medium">Porsi Terjual</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-gray-900 flex items-center justify-center lg:justify-start gap-1">
+                                    <span>4.9</span>
+                                    <i class="fa-solid fa-star text-accent-500 text-lg"></i>
+                                </p>
+                                <p class="text-xs sm:text-sm text-gray-500 font-medium">Rating Pembeli</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl sm:text-3xl font-extrabold text-gray-900">100%</p>
+                                <p class="text-xs sm:text-sm text-gray-500 font-medium">Bahan Segar Alami</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column Visual Card Banner -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto max-w-md lg:max-w-none">
+                            <!-- Background Decor Blob -->
+                            <div class="absolute -top-6 -left-6 w-72 h-72 bg-brand-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                            <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-accent-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                            <!-- Main Card Image -->
+                            <div class="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl border border-gray-100 overflow-hidden group">
+                                <img src="https://images.unsplash.com/photo-1562967914-608f82629710?w=800&auto=format&fit=crop&q=80" alt="Hidangan Dapur Berkah" class="w-full h-80 sm:h-96 object-cover rounded-2xl group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                
+                                <!-- Floating Badge Top Right -->
+                                <div class="absolute top-7 right-7 bg-white/95 backdrop-blur-md px-4 py-2 rounded-xl shadow-lg border border-gray-100 flex items-center gap-2">
+                                    <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+                                    <span class="text-xs font-bold text-gray-800">Siap Kirim Hari Ini</span>
+                                </div>
+
+                                <!-- Floating Card Bottom Left -->
+                                <div class="absolute bottom-7 left-7 right-7 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-xl border border-white/50 flex items-center justify-between">
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center text-accent-500 font-bold">
+                                            <i class="fa-solid fa-fire text-lg"></i>
+                                        </div>
+                                        <div>
+                                            <p class="text-xs text-gray-500 font-medium">Menu Terfavorit</p>
+                                            <p class="text-sm font-bold text-gray-900">Ayam Geprek Sambal Ijo</p>
+                                        </div>
+                                    </div>
+                                    <span class="text-sm font-extrabold text-brand-600 bg-brand-50 px-3 py-1 rounded-lg">Rp 22rb</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- KEUNGGULAN KAMI -->
+        <section id="keunggulan" class="py-16 bg-white border-y border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-600 font-bold text-sm tracking-wider uppercase mb-2 block">Alasan Memilih Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900">Mengapa Dapur Berkah Selalu Jadi Pilihan Favorit?</h2>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Feature Card 1 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:shadow-xl hover:border-brand-500/30 transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-brand-100 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:bg-brand-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Bahan Berkualitas Segar</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Kami hanya menggunakan bahan baku pilihan segar dari petani lokal yang disiapkan setiap pagi.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 2 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:shadow-xl hover:border-brand-500/30 transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-amber-100 text-accent-500 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:bg-accent-500 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Harga Sangat Terjangkau</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Sajian cita rasa restoran berbintang dengan porsi yang mengenyangkan dan harga ramah kantong.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 3 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:shadow-xl hover:border-brand-500/30 transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-motorcycle"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">Pengiriman Cepat & Safe</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Pengemasan rapat anti-tumpah, pesanan diantar dengan cepat agar tiba hangat di tangan Anda.
+                        </p>
+                    </div>
+
+                    <!-- Feature Card 4 -->
+                    <div class="bg-gray-50 p-6 rounded-2xl border border-gray-100 hover:shadow-xl hover:border-brand-500/30 transition-all duration-300 group">
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+                            <i class="fa-solid fa-shield-halal"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-2">100% Halal & Higienis</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Proses memasak mengikuti standar kebersihan yang ketat dan dijamin halal tanpa bumbu terlarang.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- KATALOG & FILTER PRODUK -->
+        <section id="produk" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Title -->
+                <div class="text-center max-w-3xl mx-auto mb-10">
+                    <span class="text-brand-600 font-bold text-sm tracking-wider uppercase mb-2 block">Menu Spesial</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4">Katalog Hidangan Favorit</h2>
+                    <p class="text-gray-600 text-sm sm:text-base">Pilih hidangan favorit Anda dan pesan dengan cepat via WhatsApp.</p>
+                </div>
+
+                <!-- Search & Category Filter Section -->
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-10">
+                    
+                    <!-- Search Input -->
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="search-input" placeholder="Cari nama makanan atau minuman..." class="w-full pl-11 pr-4 py-3 bg-white border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent text-sm shadow-sm transition-all">
+                    </div>
+
+                    <!-- Filter Tabs -->
+                    <div class="flex items-center gap-2 overflow-x-auto w-full md:w-auto pb-2 md:pb-0 no-scrollbar">
+                        <button class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all bg-brand-500 text-white shadow-md shadow-brand-500/20" data-category="semua">
+                            Semua Menu
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all bg-white text-gray-600 hover:bg-gray-100 border border-gray-200" data-category="makanan">
+                            Makanan Utama
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all bg-white text-gray-600 hover:bg-gray-100 border border-gray-200" data-category="camilan">
+                            Camilan
+                        </button>
+                        <button class="filter-btn px-5 py-2.5 rounded-xl font-semibold text-sm whitespace-nowrap transition-all bg-white text-gray-600 hover:bg-gray-100 border border-gray-200" data-category="minuman">
+                            Minuman Segar
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Product Grid Container -->
+                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Products rendered via JavaScript dynamically -->
+                </div>
+
+                <!-- Empty State Search Result -->
+                <div id="empty-state" class="hidden text-center py-12">
+                    <i class="fa-solid fa-utensils text-5xl text-gray-300 mb-4 block"></i>
+                    <h3 class="text-lg font-bold text-gray-700">Produk Tidak Ditemukan</h3>
+                    <p class="text-sm text-gray-500">Coba kata kunci lain atau pilih kategori yang berbeda.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- TENTANG KAMI -->
+        <section id="tentang" class="py-16 bg-white border-y border-gray-100 overflow-hidden">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    
+                    <!-- Image Grid Left -->
+                    <div class="lg:col-span-6 relative">
+                        <div class="grid grid-cols-2 gap-4">
+                            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=500&auto=format&fit=crop&q=80" alt="Suasana Dapur UMKM" class="rounded-2xl shadow-lg h-64 w-full object-cover">
+                            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=500&auto=format&fit=crop&q=80" alt="Penyajian Makanan Segar" class="rounded-2xl shadow-lg h-64 w-full object-cover mt-8">
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 bg-brand-500 text-white p-6 rounded-2xl shadow-xl hidden sm:block">
+                            <p class="text-3xl font-extrabold font-heading">5+ Tahun</p>
+                            <p class="text-xs uppercase tracking-wider font-semibold opacity-90">Melayani dengan Cinta</p>
+                        </div>
+                    </div>
+
+                    <!-- Text Content Right -->
+                    <div class="lg:col-span-6">
+                        <span class="text-brand-600 font-bold text-sm tracking-wider uppercase mb-2 block">Cerita Dapur Berkah</span>
+                        <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-6 leading-tight">
+                            Dari Dapur Rumah hingga Jadi Santapan Favorit Keluarga
+                        </h2>
+                        <p class="text-gray-600 leading-relaxed mb-6">
+                            Berawal dari usaha kuliner rumahan kecil-kecilan pada tahun 2019, <strong>Dapur Berkah</strong> tumbuh berkat kepercayaan ribuan pelanggan yang menyukai rasa otentik bumbu rempah pilihan kami.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed mb-8">
+                            Komitmen utama kami adalah menyajikan setiap hidangan dengan kebersihan standar tinggi, kehalalan terjamin, dan harga yang dapat dinikmati oleh semua kalangan masyarakat.
+                        </p>
+
+                        <!-- Feature Checkmarks -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <span class="text-sm font-semibold text-gray-800">Resep Asli Warisan</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <span class="text-sm font-semibold text-gray-800">Tanpa Bahan Pengawet</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <span class="text-sm font-semibold text-gray-800">Porsi Mantap & Puas</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">
+                                    <i class="fa-solid fa-check text-sm"></i>
+                                </div>
+                                <span class="text-sm font-semibold text-gray-800">Layanan Ramah Fast Response</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- TESTIMONI PELANGGAN -->
+        <section id="testimoni" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-600 font-bold text-sm tracking-wider uppercase mb-2 block">Ulasan Pembeli</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Apa Kata Mereka Tentang Kami?</h2>
+                    <p class="text-gray-600 text-sm sm:text-base">Pengalaman nyata dari para pelanggan setia Dapur Berkah.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-md relative flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
+                                "Ayam Geprek Sambal Ijo-nya juara banget! Sambalnya nagih, daging ayamnya juicy dan tepungnya krispi. Pengiriman juga super cepat!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop&q=80" alt="Siti Rahmawati" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-sm">Siti Rahmawati</h4>
+                                <p class="text-xs text-gray-400">Pegawai Swasta</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-md relative flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
+                                "Rendang Sapi-nya empuk banget sampai meresap ke serat daging paling dalam. Cocok banget buat acara keluarga atau makan siang di kantor."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80" alt="Budi Santoso" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-sm">Budi Santoso</h4>
+                                <p class="text-xs text-gray-400">Pelanggan Setia</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-md relative flex flex-col justify-between">
+                        <div>
+                            <div class="flex text-amber-400 mb-4 gap-1">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-6 italic">
+                                "Dimsum-nya gurih dan ukurannya besar. Es Alpukat Kocok Boba-nya juga sangat menyegarkan. Recommended UMKM kuliner!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 pt-4 border-t border-gray-100">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Anisa Wijaya" class="w-10 h-10 rounded-full object-cover">
+                            <div>
+                                <h4 class="font-bold text-gray-900 text-sm">Anisa Wijaya</h4>
+                                <p class="text-xs text-gray-400">Mahasiswi</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LOKASI & JAM OPERASIONAL -->
+        <section id="lokasi" class="py-16 bg-white border-t border-gray-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-brand-600 font-bold text-sm tracking-wider uppercase mb-2 block">Kunjungi Kedai Kami</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-3">Lokasi & Jam Operasional</h2>
+                    <p class="text-gray-600 text-sm sm:text-base">Menerima dine-in, take away, dan pemesanan online via WhatsApp.</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                    
+                    <!-- Contact Info & Operational Hours Table -->
+                    <div class="lg:col-span-5 bg-gray-50 p-6 sm:p-8 rounded-3xl border border-gray-100 shadow-sm">
+                        
+                        <!-- Address Info -->
+                        <div class="flex items-start gap-4 mb-6">
+                            <div class="w-10 h-10 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-location-dot text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base mb-1">Alamat Outlet</h3>
+                                <p class="text-sm text-gray-600 leading-relaxed">
+                                    Jl. Kuliner Nusantara No. 88, Binjai Kota, Sumatera Utara 20711
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Phone Info -->
+                        <div class="flex items-start gap-4 mb-8">
+                            <div class="w-10 h-10 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 text-base mb-1">Telepon / WhatsApp</h3>
+                                <p class="text-sm text-gray-600">+62 812-3456-7890</p>
+                            </div>
+                        </div>
+
+                        <!-- Operational Hours Table -->
+                        <h3 class="font-bold text-gray-900 text-base mb-3 flex items-center gap-2">
+                            <i class="fa-regular fa-clock text-brand-600"></i>
+                            <span>Jam Buka - Tutup</span>
+                        </h3>
+                        <div class="bg-white rounded-2xl p-4 border border-gray-200 text-sm space-y-2 mb-6">
+                            <div class="flex justify-between py-1 border-b border-gray-100">
+                                <span class="text-gray-600 font-medium">Senin - Jumat</span>
+                                <span class="font-bold text-gray-900">09:00 - 21:00 WIB</span>
+                            </div>
+                            <div class="flex justify-between py-1 border-b border-gray-100">
+                                <span class="text-gray-600 font-medium">Sabtu - Minggu</span>
+                                <span class="font-bold text-gray-900">08:00 - 22:00 WIB</span>
+                            </div>
+                            <div class="flex justify-between py-1 text-emerald-600 font-semibold">
+                                <span>Hari Libur Nasional</span>
+                                <span>Tetap Buka</span>
+                            </div>
+                        </div>
+
+                        <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="w-full py-3 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-xl shadow-md text-center flex items-center justify-center gap-2 transition-colors">
+                            <i class="fa-solid fa-diamond-turn-right"></i>
+                            <span>Petunjuk Arah Google Maps</span>
+                        </a>
+                    </div>
+
+                    <!-- Google Maps Iframe Embed -->
+                    <div class="lg:col-span-7 h-[380px] lg:h-[450px] bg-gray-200 rounded-3xl overflow-hidden shadow-md border border-gray-100 relative">
+                        <iframe 
+                            class="w-full h-full border-0"
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3981.983944682057!2d98.485123!3d3.601234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzYnMDQuNCJOIDk4wrAyOScwNi40IkU!5e0!3m2!1sid!2sid!4v1620000000000!5m2!1sid!2sid" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="Lokasi Dapur Berkah">
+                        </iframe>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-gray-900 text-gray-300 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+                
+                <!-- Col 1: Brand Info -->
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-brand-500 rounded-xl flex items-center justify-center text-white">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <span class="text-xl font-extrabold font-heading text-white">Dapur Berkah</span>
+                    </div>
+                    <p class="text-sm text-gray-400 leading-relaxed mb-6">
+                        Menyajikan makanan dan minuman khas Nusantara dengan rasa otentik, resep berkualitas, dan 100% halal.
+                    </p>
+                    <!-- Social Links -->
+                    <div class="flex gap-3">
+                        <a href="#" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-brand-500 text-gray-300 hover:text-white flex items-center justify-center transition-colors" aria-label="Instagram">
+                            <i class="fa-brands fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-brand-500 text-gray-300 hover:text-white flex items-center justify-center transition-colors" aria-label="Facebook">
+                            <i class="fa-brands fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="w-9 h-9 rounded-xl bg-gray-800 hover:bg-brand-500 text-gray-300 hover:text-white flex items-center justify-center transition-colors" aria-label="TikTok">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-heading text-base">Navigasi Cepat</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#beranda" class="hover:text-brand-500 transition-colors">Beranda</a></li>
+                        <li><a href="#keunggulan" class="hover:text-brand-500 transition-colors">Keunggulan Kami</a></li>
+                        <li><a href="#produk" class="hover:text-brand-500 transition-colors">Menu Produk</a></li>
+                        <li><a href="#tentang" class="hover:text-brand-500 transition-colors">Tentang Kami</a></li>
+                        <li><a href="#lokasi" class="hover:text-brand-500 transition-colors">Lokasi & Jam Buka</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Product Categories -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-heading text-base">Kategori Menu</h4>
+                    <ul class="space-y-2.5 text-sm">
+                        <li><a href="#produk" class="hover:text-brand-500 transition-colors">Makanan Utama</a></li>
+                        <li><a href="#produk" class="hover:text-brand-500 transition-colors">Camilan & Snack</a></li>
+                        <li><a href="#produk" class="hover:text-brand-500 transition-colors">Minuman Segar</a></li>
+                        <li><a href="#produk" class="hover:text-brand-500 transition-colors">Paket Catering</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact Footer -->
+                <div>
+                    <h4 class="text-white font-bold mb-4 font-heading text-base">Kontak Pesanan</h4>
+                    <p class="text-sm text-gray-400 mb-4">Siap melayani pesanan harian maupun acara prasmanan/catering.</p>
+                    <a href="https://wa.me/6281234567890" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-4 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm transition-colors shadow-md">
+                        <i class="fa-brands fa-whatsapp text-lg"></i>
+                        <span>WhatsApp: 0812-3456-7890</span>
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- Copyright Bottom -->
+            <div class="pt-8 border-t border-gray-800 text-center text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p>&copy; 2026 Dapur Berkah. Hak Cipta Dilindungi Undang-Undang.</p>
+                <p>Dibuat untuk Kemajuan UMKM Indonesia 🇮🇩</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/6281234567890?text=Halo%20Dapur%20Berkah,%20saya%20ingin%20bertanya%20mengenai%20menu%20dan%20pemesanan." target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 group flex items-center justify-center" aria-label="Chat via WhatsApp">
+        <!-- Pulse Animation Effect -->
+        <span class="absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75 animate-pulse-ring"></span>
+        
+        <!-- Online Badge Indicator -->
+        <span class="absolute -top-1 -right-1 flex h-4 w-4">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent-500 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-4 w-4 bg-accent-500 border-2 border-white"></span>
+        </span>
+
+        <!-- Button Content -->
+        <div class="relative bg-emerald-500 hover:bg-emerald-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-2xl transition-transform duration-300 group-hover:scale-110">
+            <i class="fa-brands fa-whatsapp text-3xl"></i>
+        </div>
+
+        <!-- Tooltip Label on Hover -->
+        <div class="absolute right-16 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap shadow-md pointer-events-none">
+            Chat Penjual Sekarang
+        </div>
+    </a>
+
+    <!-- PRODUCT DETAIL MODAL POP-UP -->
+    <div id="product-modal" class="fixed inset-0 z-50 hidden overflow-y-auto bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl transform transition-all relative animate-fade-in">
+            
+            <!-- Close Modal Button -->
+            <button id="close-modal-btn" class="absolute top-4 right-4 z-10 w-9 h-9 bg-black/40 hover:bg-black/70 text-white rounded-full flex items-center justify-center transition-colors">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+
+            <!-- Modal Image -->
+            <div class="relative h-60 w-full bg-gray-100">
+                <img id="modal-image" src="" alt="" class="w-full h-full object-cover">
+                <span id="modal-category" class="absolute bottom-4 left-4 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider"></span>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6">
+                <div class="flex items-center justify-between mb-2">
+                    <h3 id="modal-title" class="text-2xl font-bold font-heading text-gray-900"></h3>
+                    <div class="flex items-center gap-1 text-amber-500 text-sm font-bold">
+                        <i class="fa-solid fa-star"></i>
+                        <span id="modal-rating"></span>
+                    </div>
+                </div>
+
+                <p id="modal-price" class="text-xl font-extrabold text-brand-600 mb-4"></p>
+                <p id="modal-description" class="text-gray-600 text-sm leading-relaxed mb-6"></p>
+
+                <!-- Quantity Selector Section -->
+                <div class="bg-gray-50 p-4 rounded-2xl border border-gray-100 mb-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-sm font-bold text-gray-700">Jumlah Porsi</span>
+                        <div class="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-2 py-1 shadow-sm">
+                            <button id="btn-minus" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-lg flex items-center justify-center transition-colors">-</button>
+                            <span id="quantity-count" class="font-bold text-gray-900 w-6 text-center">1</span>
+                            <button id="btn-plus" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-lg flex items-center justify-center transition-colors">+</button>
+                        </div>
+                    </div>
+
+                    <!-- Total Price Calculation -->
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-200">
+                        <span class="text-sm font-semibold text-gray-500">Total Harga:</span>
+                        <span id="modal-total-price" class="text-xl font-extrabold text-gray-900">Rp 0</span>
+                    </div>
+                </div>
+
+                <!-- Submit WhatsApp Order Button -->
+                <button id="modal-order-btn" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-2xl shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-3 text-base transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                    <span>Lanjut Pesan ke WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT CODE LOGIC -->
+    <script>
+        // DATA PRODUK UMKM
+        const products = [
+            {
+                id: 1,
+                name: "Nasi Ayam Geprek Sambal Ijo",
+                category: "makanan",
+                price: 22000,
+                rating: 4.9,
+                reviews: 128,
+                image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop&q=80",
+                description: "Ayam goreng krispi yang digeprek dengan sambal cabai hijau pedas gurih alami. Disajikan lengkap dengan nasi hangat, lalapan segar, dan tahu goreng."
+            },
+            {
+                id: 2,
+                name: "Rendang Sapi Khas Padang",
+                category: "makanan",
+                price: 35000,
+                rating: 5.0,
+                reviews: 210,
+                image: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&auto=format&fit=crop&q=80",
+                description: "Daging sapi pilihan yang dimasak perlahan hingga 8 jam menggunakan santan dan rempah-rempah asli Nusantara. Sangat empuk dan meresap."
+            },
+            {
+                id: 3,
+                name: "Dimsum Ayam Melted (isi 4)",
+                category: "camilan",
+                price: 18000,
+                rating: 4.8,
+                reviews: 95,
+                image: "https://images.unsplash.com/photo-1496116218417-1a781b1c416c?w=600&auto=format&fit=crop&q=80",
+                description: "Dimsum olahan daging ayam segar berdaging tebal disiram saus keju gurih dan saus mentai yang lezat. Lengkap dengan chili oil khas."
+            },
+            {
+                id: 4,
+                name: "Pisang Goreng Keju Cokelat",
+                category: "camilan",
+                price: 15000,
+                rating: 4.7,
+                reviews: 74,
+                image: "https://images.unsplash.com/photo-1587314168485-3236d6710814?w=600&auto=format&fit=crop&q=80",
+                description: "Pisang kepok manis goreng krispi berbalut tepung renyah, ditaburi keju parut melimpah dan lelehan cokelat premium."
+            },
+            {
+                id: 5,
+                name: "Es Teh Manis Bunga Telang",
+                category: "minuman",
+                price: 8000,
+                rating: 4.9,
+                reviews: 150,
+                image: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&auto=format&fit=crop&q=80",
+                description: "Kesegaran es teh alami yang dipadukan dengan ekstrak Bunga Telang organik. Kaya antioksidan, manisnya pas, dan sangat menyegarkan dahaga."
+            },
+            {
+                id: 6,
+                name: "Es Alpukat Kocok Boba",
+                category: "minuman",
+                price: 16000,
+                rating: 4.9,
+                reviews: 185,
+                image: "https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&auto=format&fit=crop&q=80",
+                description: "Buah alpukat mentega segar yang dikocok halus, ditambahkan krimer kental manis, es batu, serta boba kenyal rasa gula aren."
+            }
+        ];
+
+        // WA PHONE NUMBER (Ubah sesuai nomor WhatsApp UMKM)
+        const WA_PHONE_NUMBER = "6281234567890";
+
+        // DOM ELEMENTS
+        const productGrid = document.getElementById("product-grid");
+        const emptyState = document.getElementById("empty-state");
+        const searchInput = document.getElementById("search-input");
+        const filterBtns = document.querySelectorAll(".filter-btn");
+
+        // MODAL DOM ELEMENTS
+        const productModal = document.getElementById("product-modal");
+        const closeModalBtn = document.getElementById("close-modal-btn");
+        const modalImage = document.getElementById("modal-image");
+        const modalCategory = document.getElementById("modal-category");
+        const modalTitle = document.getElementById("modal-title");
+        const modalRating = document.getElementById("modal-rating");
+        const modalPrice = document.getElementById("modal-price");
+        const modalDescription = document.getElementById("modal-description");
+        const modalTotalPrice = document.getElementById("modal-total-price");
+        const modalOrderBtn = document.getElementById("modal-order-btn");
+        const quantityCount = document.getElementById("quantity-count");
+        const btnMinus = document.getElementById("btn-minus");
+        const btnPlus = document.getElementById("btn-plus");
+
+        // STATE VARIABLES
+        let activeCategory = "semua";
+        let searchQuery = "";
+        let selectedProduct = null;
+        let currentQty = 1;
+
+        // FORMAT CURRENCY RUPIAH
+        function formatRupiah(amount) {
+            return "Rp " + amount.toLocaleString("id-ID");
+        }
+
+        // RENDER PRODUCTS GRID
+        function renderProducts() {
+            productGrid.innerHTML = "";
+            
+            // Filter products based on category and search query
+            const filteredProducts = products.filter(product => {
+                const matchesCategory = activeCategory === "semua" || product.category === activeCategory;
+                const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                                      product.description.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesCategory && matchesSearch;
+            });
+
+            if (filteredProducts.length === 0) {
+                emptyState.classList.remove("hidden");
+            } else {
+                emptyState.classList.add("hidden");
+                filteredProducts.forEach(product => {
+                    const card = document.createElement("div");
+                    card.className = "bg-white rounded-3xl border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group";
+                    
+                    card.innerHTML = `
+                        <div>
+                            <!-- Product Image Container -->
+                            <div class="relative overflow-hidden h-52 bg-gray-100">
+                                <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                                <span class="absolute top-4 left-4 bg-white/90 backdrop-blur-md text-gray-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-gray-200">
+                                    ${product.category}
+                                </span>
+                            </div>
+
+                            <!-- Product Content -->
+                            <div class="p-5">
+                                <div class="flex items-center justify-between mb-2">
+                                    <div class="flex items-center gap-1 text-amber-500 text-xs font-bold">
+                                        <i class="fa-solid fa-star"></i>
+                                        <span>${product.rating} (${product.reviews})</span>
+                                    </div>
+                                    <span class="text-xs font-medium text-gray-400">Halal 100%</span>
+                                </div>
+                                
+                                <h3 class="font-bold text-gray-900 text-lg mb-2 group-hover:text-brand-600 transition-colors">${product.name}</h3>
+                                <p class="text-gray-500 text-xs line-clamp-2 leading-relaxed mb-4">${product.description}</p>
+                            </div>
+                        </div>
+
+                        <!-- Card Footer -->
+                        <div class="p-5 pt-0">
+                            <div class="flex items-center justify-between pt-3 border-t border-gray-100 mb-4">
+                                <span class="text-xs text-gray-400 font-medium">Harga</span>
+                                <span class="text-lg font-extrabold text-brand-600">${formatRupiah(product.price)}</span>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <button onclick="openProductModal(${product.id})" class="py-2.5 px-3 bg-gray-100 hover:bg-gray-200 text-gray-800 text-xs font-bold rounded-xl transition-colors text-center flex items-center justify-center gap-1">
+                                    <i class="fa-regular fa-eye"></i>
+                                    <span>Detail</span>
+                                </button>
+                                <button onclick="quickOrderWA(${product.id})" class="py-2.5 px-3 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-xl transition-colors shadow-sm text-center flex items-center justify-center gap-1">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                    <span>Pesan WA</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                    productGrid.appendChild(card);
+                });
+            }
+        }
+
+        // CATEGORY FILTER TAB EVENT
+        filterBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                filterBtns.forEach(b => {
+                    b.classList.remove("bg-brand-500", "text-white", "shadow-md", "shadow-brand-500/20");
+                    b.classList.add("bg-white", "text-gray-600", "border", "border-gray-200");
+                });
+                btn.classList.remove("bg-white", "text-gray-600", "border", "border-gray-200");
+                btn.classList.add("bg-brand-500", "text-white", "shadow-md", "shadow-brand-500/20");
+
+                activeCategory = btn.getAttribute("data-category");
+                renderProducts();
+            });
+        });
+
+        // SEARCH INPUT EVENT
+        searchInput.addEventListener("input", (e) => {
+            searchQuery = e.target.value;
+            renderProducts();
+        });
+
+        // MODAL FUNCTIONALITY
+        function openProductModal(productId) {
+            selectedProduct = products.find(p => p.id === productId);
+            if (!selectedProduct) return;
+
+            currentQty = 1;
+            quantityCount.textContent = currentQty;
+
+            modalImage.src = selectedProduct.image;
+            modalImage.alt = selectedProduct.name;
+            modalCategory.textContent = selectedProduct.category;
+            modalTitle.textContent = selectedProduct.name;
+            modalRating.textContent = `${selectedProduct.rating} (${selectedProduct.reviews} ulasan)`;
+            modalPrice.textContent = formatRupiah(selectedProduct.price);
+            modalDescription.textContent = selectedProduct.description;
+
+            updateTotalPrice();
+            productModal.classList.remove("hidden");
+            document.body.style.overflow = "hidden"; // Prevent body scroll
+        }
+
+        function closeModal() {
+            productModal.classList.add("hidden");
+            document.body.style.overflow = "auto";
+        }
+
+        function updateTotalPrice() {
+            if (!selectedProduct) return;
+            const total = selectedProduct.price * currentQty;
+            modalTotalPrice.textContent = formatRupiah(total);
+        }
+
+        // QUANTITY ADJUSTMENT
+        btnMinus.addEventListener("click", () => {
+            if (currentQty > 1) {
+                currentQty--;
+                quantityCount.textContent = currentQty;
+                updateTotalPrice();
+            }
+        });
+
+        btnPlus.addEventListener("click", () => {
+            currentQty++;
+            quantityCount.textContent = currentQty;
+            updateTotalPrice();
+        });
+
+        closeModalBtn.addEventListener("click", closeModal);
+        productModal.addEventListener("click", (e) => {
+            if (e.target === productModal) closeModal();
+        });
+
+        // TOAST NOTIFICATION HANDLER
+        function showToast(message) {
+            const toast = document.getElementById("toast");
+            const toastMessage = document.getElementById("toast-message");
+            toastMessage.textContent = message;
+
+            toast.classList.remove("translate-x-full");
+            setTimeout(() => {
+                toast.classList.add("translate-x-full");
+            }, 3500);
+        }
+
+        // WHATSAPP ORDER REDIRECT LOGIC
+        modalOrderBtn.addEventListener("click", () => {
+            if (!selectedProduct) return;
+            
+            const totalAmount = selectedProduct.price * currentQty;
+            const message = `Halo Dapur Berkah, saya ingin memesan *${selectedProduct.name}* sebanyak *${currentQty} porsi*.\nTotal: *${formatRupiah(totalAmount)}*.\nMohon diproses ya! Terima kasih.`;
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${WA_PHONE_NUMBER}?text=${encodedMessage}`;
+
+            showToast("Pesanan diproses! Mengarahkan ke WhatsApp...");
+            closeModal();
+            
+            setTimeout(() => {
+                window.open(waUrl, "_blank");
+            }, 800);
+        });
+
+        function quickOrderWA(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            const message = `Halo Dapur Berkah, saya ingin memesan *${product.name}* sebanyak *1 porsi*.\nTotal: *${formatRupiah(product.price)}*.\nMohon diproses ya!`;
+            const encodedMessage = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${WA_PHONE_NUMBER}?text=${encodedMessage}`;
+
+            showToast(`Membuka WhatsApp untuk ${product.name}...`);
+            setTimeout(() => {
+                window.open(waUrl, "_blank");
+            }, 800);
+        }
+
+        // MOBILE MENU NAVIGATION TOGGLE
+        const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+        const mobileMenu = document.getElementById("mobile-menu");
+        const menuIcon = document.getElementById("menu-icon");
+        const mobileLinks = document.querySelectorAll(".mobile-link");
+
+        mobileMenuBtn.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+            if (mobileMenu.classList.contains("hidden")) {
+                menuIcon.classList.remove("fa-xmark");
+                menuIcon.classList.add("fa-bars");
+            } else {
+                menuIcon.classList.remove("fa-bars");
+                menuIcon.classList.add("fa-xmark");
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                mobileMenu.classList.add("hidden");
+                menuIcon.classList.remove("fa-xmark");
+                menuIcon.classList.add("fa-bars");
+            });
+        });
+
+        // INITIAL RENDER ON LOAD
+        window.addEventListener("DOMContentLoaded", () => {
+            renderProducts();
+        });
+    </script>
+</body>
+</html>
